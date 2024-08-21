@@ -1,0 +1,46 @@
+import gi
+import subprocess
+from gi.repository import Gtk, Gdk
+
+gi.require_version('Gtk', '3.0')
+
+def main():
+    try:
+        # Load the Glade file
+        builder = Gtk.Builder()
+        builder.add_from_file("path/to/your/file.glade")
+        
+        # Get the main window and drawing area
+        window = builder.get_object("main_window")
+        drawing_area = builder.get_object("drawing_area")
+        
+        # Show the window
+        window.show_all()
+        
+        # Get the XID of the drawing area
+        xid = drawing_area.get_window().get_xid()
+        
+        # Run mplayer with the XID embedded in the drawing area
+        command = f"mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {xid}"
+        subprocess.Popen(command, shell=True)
+        
+        # Start the GTK main loop
+        Gtk.main()
+    
+    except Gtk.BuilderError as e:
+        print(f"Error loading the Glade file: {e}")
+        # Provide an alternative or notify the user
+        print("Please check your Glade file for unsupported widgets.")
+    
+    except AttributeError as e:
+        print(f"Error retrieving widgets: {e}")
+        # Handle the error, e.g., by providing a fallback UI or notifying the user
+        print("One or more required widgets could not be found in the Glade file.")
+    
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        # General error handling
+        print("An unexpected error occurred. Please check the logs for details.")
+
+if __name__ == "__main__":
+    main()
