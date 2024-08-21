@@ -14,19 +14,19 @@ def main():
         window = builder.get_object("main_window")
         drawing_area = builder.get_object("drawingarea1")
 
-        # Example of accessing the drawing area and its properties
-        if drawing_area is not None and drawing_area.get_window() is not None:
-            xid = drawing_area.get_window().get_xid()
+        if drawing_area is not None:
+            # Get the XID of the drawing area using GDK
+            window_id = drawing_area.get_window().get_xid()
             
             # Debug print statements
             print("Drawing area found.")
-            print("XID of drawing area: {}".format(xid))
+            print("XID of drawing area: {}".format(window_id))
             
             # Run mplayer with the XID embedded in the drawing area
-            command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
+            command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(window_id)
             subprocess.Popen(command, shell=True)
         else:
-            print("Drawing area or its window is not available.")
+            print("Drawing area not found.")
         
         # Show the window
         window.show_all()
