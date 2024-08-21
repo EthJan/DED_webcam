@@ -6,6 +6,9 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('GtkSource', '3.0')
 from gi.repository import GtkSource
 
+def is_source_view(widget):
+    return isinstance(widget, GtkSource.View)
+
 def main():
     try:
         # Load the Glade file
@@ -16,25 +19,27 @@ def main():
         window = builder.get_object("main_window")
         drawing_area = builder.get_object("drawingarea1")
         
-        # Check if the widget is a GtkSourceView
-        def is_source_view(widget):
-            return isinstance(widget, GtkSource.View)
+        # Get the list of widgets in the window
+        widgets = window.get_children()
         
-        # Check and remove GtkSourceView widgets if found
-        for child in window.get_children():
-            if is_source_view(child):
-                print("GtkSourceView widget found and will be ignored.")
+        # Check and handle GtkSourceView widgets
+        for widget in widgets:
+            if is_source_view(widget):
+                print("GtkSourceView widget found: {}".format(widget))
                 continue  # Skip this widget
         
         # Show the window
         window.show_all()
         
         # Get the XID of the drawing area
-        xid = drawing_area.get_window().get_xid()
-        
-        # Run mplayer with the XID embedded in the drawing area
-        command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
-        subprocess.Popen(command, shell=True)
+        if drawing_area is not None and drawing_area.get_window() is not None:
+            xid = drawing_area.get_window().get_xid()
+            
+            # Run mplayer with the XID embedded in the drawing area
+            command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
+            subprocess.Popen(command, shell=True)
+        else:
+            print("Drawing area or its window is not available.")
         
         # Start the GTK main loop
         Gtk.main()
