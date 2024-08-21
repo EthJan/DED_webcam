@@ -1,25 +1,43 @@
 import gi
+import subprocess
+from gi.repository import Gtk, Gdk
+
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 
 def main():
     try:
+        # Load the Glade file
         builder = Gtk.Builder()
         builder.add_from_file("/home/operator/tmc/python/images/tormach_mill_ui.glade")
         
+        # Get the main window and drawing area
         window = builder.get_object("main_window")
         drawing_area = builder.get_object("drawingarea1")
 
-        if drawing_area:
-            print("Drawing area successfully retrieved.")
+        # Example of accessing the drawing area and its properties
+        if drawing_area is not None and drawing_area.get_window() is not None:
+            xid = drawing_area.get_window().get_xid()
+            
+            # Debug print statements
+            print("Drawing area found.")
+            print("XID of drawing area: {}".format(xid))
+            
+            # Run mplayer with the XID embedded in the drawing area
+            command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
+            subprocess.Popen(command, shell=True)
         else:
-            print("Drawing area not found.")
+            print("Drawing area or its window is not available.")
         
+        # Show the window
         window.show_all()
+        
+        # Start the GTK main loop
         Gtk.main()
     
     except Exception as e:
-        print("Error: {}".format(e))
+        print("An error occurred: {}".format(e))
+        # General error handling
+        print("Please check the Glade file and widget names.")
 
 if __name__ == "__main__":
     main()
