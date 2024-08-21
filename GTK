@@ -3,16 +3,28 @@ import subprocess
 from gi.repository import Gtk, Gdk
 
 gi.require_version('Gtk', '3.0')
+gi.require_version('GtkSource', '3.0')
+from gi.repository import GtkSource
 
 def main():
     try:
         # Load the Glade file
         builder = Gtk.Builder()
-        builder.add_from_file("path/to/your/file.glade")
+        builder.add_from_file("/home/operator/tmc/python/images/tormach_mill_ui.glade")
         
         # Get the main window and drawing area
         window = builder.get_object("main_window")
-        drawing_area = builder.get_object("drawing_area")
+        drawing_area = builder.get_object("drawingarea1")
+        
+        # Check if the widget is a GtkSourceView
+        def is_source_view(widget):
+            return isinstance(widget, GtkSource.View)
+        
+        # Check and remove GtkSourceView widgets if found
+        for child in window.get_children():
+            if is_source_view(child):
+                print("GtkSourceView widget found and will be ignored.")
+                continue  # Skip this widget
         
         # Show the window
         window.show_all()
@@ -21,26 +33,16 @@ def main():
         xid = drawing_area.get_window().get_xid()
         
         # Run mplayer with the XID embedded in the drawing area
-        command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid %d" % xid
+        command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
         subprocess.Popen(command, shell=True)
         
         # Start the GTK main loop
         Gtk.main()
     
-    except Gtk.BuilderError as e:
-        print("Error loading the Glade file: %s" % e)
-        # Provide an alternative or notify the user
-        print("Please check your Glade file for unsupported widgets.")
-    
-    except AttributeError as e:
-        print("Error retrieving widgets: %s" % e)
-        # Handle the error, e.g., by providing a fallback UI or notifying the user
-        print("One or more required widgets could not be found in the Glade file.")
-    
     except Exception as e:
-        print("An unexpected error occurred: %s" % e)
+        print("An error occurred: {}".format(e))
         # General error handling
-        print("An unexpected error occurred. Please check the logs for details.")
+        print("Please check the Glade file and widget names.")
 
 if __name__ == "__main__":
     main()
