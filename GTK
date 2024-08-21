@@ -21,15 +21,26 @@ def main():
         xid = drawing_area.get_window().get_xid()
         
         # Run mplayer with the XID embedded in the drawing area
-        command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid {}".format(xid)
+        command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid %d" % xid
         subprocess.Popen(command, shell=True)
         
         # Start the GTK main loop
         Gtk.main()
     
+    except Gtk.BuilderError as e:
+        print("Error loading the Glade file: %s" % e)
+        # Provide an alternative or notify the user
+        print("Please check your Glade file for unsupported widgets.")
+    
+    except AttributeError as e:
+        print("Error retrieving widgets: %s" % e)
+        # Handle the error, e.g., by providing a fallback UI or notifying the user
+        print("One or more required widgets could not be found in the Glade file.")
+    
     except Exception as e:
-        print("An error occurred: {}".format(e))
-        # Handle specific errors or provide fallback options
+        print("An unexpected error occurred: %s" % e)
+        # General error handling
+        print("An unexpected error occurred. Please check the logs for details.")
 
 if __name__ == "__main__":
     main()
