@@ -4,7 +4,6 @@ gi.require_version('GtkSource', '3.0')
 from gi.repository import Gtk, GtkSource
 
 def main():
-    # Create a simple GtkSourceView
     window = Gtk.Window(title="GtkSourceView Test")
     sourceview = GtkSource.View()
     window.add(sourceview)
