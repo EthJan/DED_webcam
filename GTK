@@ -1,6 +1,45 @@
-operator@tormachpcnc:~/Desktop$ dpkg -l | grep libgtk-3-0
-ii  libgtk-3-0:amd64                            3.10.8~8+qiana                                      amd64        GTK+ graphical user interface library
-operator@tormachpcnc:~/Desktop$ dpkg -l | grep libgtksourceview-3.0
-ii  libgtksourceview-3.0-1:amd64                3.10.2-0ubuntu1                                     amd64        shared libraries for the GTK+ syntax highlighting widget
-ii  libgtksourceview-3.0-common                 3.10.2-0ubuntu1                                     all          common files for the GTK+ syntax highlighting widget
-ii  libgtksourceview-3.0-dev                    3.10.2-0ubuntu1                                     amd64        development files for the GTK+ syntax highlighting widget
+libgtk-3-0:
+  Installed: 3.10.8~8+qiana
+  Candidate: 3.10.8~8+qiana
+  Version table:
+     3.10.8-0ubuntu1.6 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty-updates/main amd64 Packages
+     3.10.8-0ubuntu1.4 0
+        500 http://security.ubuntu.com/ubuntu/ trusty-security/main amd64 Packages
+     3.10.8-0ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+ *** 3.10.8~8+qiana 0
+        700 http://packages.linuxmint.com/ rosa/upstream amd64 Packages
+        100 /var/lib/dpkg/status
+libgtksourceview-3.0-dev:
+  Installed: 3.10.2-0ubuntu1
+  Candidate: 3.10.2-0ubuntu1
+  Version table:
+ *** 3.10.2-0ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+        100 /var/lib/dpkg/status
+libgtksourceview-3.0-doc:
+  Installed: 3.10.2-0ubuntu1
+  Candidate: 3.10.2-0ubuntu1
+  Version table:
+ *** 3.10.2-0ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+        100 /var/lib/dpkg/status
+libgtksourceview-3.0-0:
+  Installed: (none)
+  Candidate: (none)
+  Version table:
+libgtksourceview-3.0-1:
+  Installed: 3.10.2-0ubuntu1
+  Candidate: 3.10.2-0ubuntu1
+  Version table:
+ *** 3.10.2-0ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+        100 /var/lib/dpkg/status
+libgtksourceview-3.0-common:
+  Installed: 3.10.2-0ubuntu1
+  Candidate: 3.10.2-0ubuntu1
+  Version table:
+ *** 3.10.2-0ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ trusty/main amd64 Packages
+        100 /var/lib/dpkg/status
