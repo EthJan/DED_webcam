@@ -1,8 +1,15 @@
-/usr/lib/x86_64-linux-gnu/libgtksourceview-3.0.so.1.1.0
-/usr/share/doc/libgtksourceview-3.0-1
-/usr/share/doc/libgtksourceview-3.0-1/README
-/usr/share/doc/libgtksourceview-3.0-1/NEWS.gz
-/usr/share/doc/libgtksourceview-3.0-1/copyright
-/usr/share/doc/libgtksourceview-3.0-1/AUTHORS
-/usr/share/doc/libgtksourceview-3.0-1/changelog.Debian.gz
-/usr/lib/x86_64-linux-gnu/libgtksourceview-3.0.so.1
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('GtkSource', '3.0')
+from gi.repository import Gtk, GtkSource
+
+def main():
+    # Create a simple GtkSourceView
+    window = Gtk.Window(title="GtkSourceView Test")
+    sourceview = GtkSource.View()
+    window.add(sourceview)
+    window.show_all()
+    Gtk.main()
+
+if __name__ == "__main__":
+    main()
