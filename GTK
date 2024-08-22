@@ -1,4 +1,1 @@
-Traceback (most recent call last):
-  File "webcam_test_code.py", line 7, in <module>
-    builder.add_from_file("my_ui.glade")
-gi._glib.GError: Invalid object type `GtkSourceView'
+ii  gir1.2-gtksource-3.0                        3.10.2-0ubuntu1                                     amd64        gir files for the GTK+ syntax highlighting widget
