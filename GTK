@@ -1,19 +1,5 @@
-import gi
-gi.require_version('Gtk', '3.0')
-gi.require_version('GtkSource', '3.0')
-from gi.repository import Gtk, GtkSource
-
-builder = Gtk.Builder()
-builder.add_from_file("test_ui.glade")
-
-window = builder.get_object("window1")
-notebook = builder.get_object("notebook1")
-sourceview = builder.get_object("gtksourceview1")
-
-if not sourceview:
-    print("Error: GtkSourceView widget not found.")
-else:
-    print("GtkSourceView widget successfully loaded.")
-
-window.show_all()
-Gtk.main()
+  File "test.py", line 23, in <module>
+    main()
+  File "test.py", line 8, in main
+    builder.add_from_file("test_ui.glade")
+gi._glib.GError: Invalid object type `GtkSourceView'
