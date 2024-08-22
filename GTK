@@ -1,5 +1,6 @@
-operator@tormachpcnc:~/Desktop$ dpkg -l | grep python3-gi
-ii  python3-gi                                  3.12.0-1ubuntu1                                     amd64        Python 3 bindings for gobject-introspection libraries
-ii  python3-gi-cairo                            3.12.0-1ubuntu1                                     amd64        Python 3 Cairo bindings for the GObject library
-operator@tormachpcnc:~/Desktop$ dpkg -l | grep gir1.2-gtksource-3.0
-ii  gir1.2-gtksource-3.0                        3.10.2-0ubuntu1                                     amd64        gir files for the GTK+ syntax highlighting widget
+operator@tormachpcnc:~/Desktop$ dpkg -l | grep libgtk-3-0
+ii  libgtk-3-0:amd64                            3.10.8~8+qiana                                      amd64        GTK+ graphical user interface library
+operator@tormachpcnc:~/Desktop$ dpkg -l | grep libgtksourceview-3.0
+ii  libgtksourceview-3.0-1:amd64                3.10.2-0ubuntu1                                     amd64        shared libraries for the GTK+ syntax highlighting widget
+ii  libgtksourceview-3.0-common                 3.10.2-0ubuntu1                                     all          common files for the GTK+ syntax highlighting widget
+ii  libgtksourceview-3.0-dev                    3.10.2-0ubuntu1                                     amd64        development files for the GTK+ syntax highlighting widget
