@@ -3,15 +3,17 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('GtkSource', '3.0')
 from gi.repository import Gtk, GtkSource
 
-def test_gtk_sourceview():
-    window = Gtk.Window(title="GtkSourceView Test")
-    notebook = Gtk.Notebook()
-    sourceview = GtkSource.View()  # Create a GtkSourceView instance
-    notebook.append_page(sourceview, Gtk.Label(label="Source View Page"))
-    window.add(notebook)
-    window.set_default_size(800, 600)
-    window.connect("destroy", Gtk.main_quit)
-    window.show_all()
-    Gtk.main()
+builder = Gtk.Builder()
+builder.add_from_file("test_ui.glade")
 
-test_gtk_sourceview()
+window = builder.get_object("window1")
+notebook = builder.get_object("notebook1")
+sourceview = builder.get_object("gtksourceview1")
+
+if not sourceview:
+    print("Error: GtkSourceView widget not found.")
+else:
+    print("GtkSourceView widget successfully loaded.")
+
+window.show_all()
+Gtk.main()
