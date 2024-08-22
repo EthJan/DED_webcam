@@ -1,26 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
-<interface>
-  <requires lib="gtk+" version="3.0"/>
-  <requires lib="gtksourceview" version="3.0"/>
-  <object class="GtkWindow" id="window1">
-    <property name="title">GTK+ 3 Window</property>
-    <property name="default_width">400</property>
-    <property name="default_height">300</property>
-    <child>
-      <object class="GtkBox" id="box1">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkSourceView" id="gtksourceview1">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="left_margin">5</property>
-            <property name="right_margin">5</property>
-            <property name="top_margin">5</property>
-            <property name="bottom_margin">5</property>
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
-</interface>
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('GtkSource', '3.0')
+from gi.repository import Gtk, GtkSource
+
+def main():
+    builder = Gtk.Builder()
+    builder.add_from_file("simple_ui.glade")
+
+    window = builder.get_object("window1")
+    window.connect("destroy", Gtk.main_quit)
+    window.show_all()
+
+    Gtk.main()
+
+if __name__ == "__main__":
+    main()
