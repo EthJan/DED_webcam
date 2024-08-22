@@ -1,1 +1,15 @@
-ii  gir1.2-gtksource-3.0                        3.10.2-0ubuntu1                                     amd64        gir files for the GTK+ syntax highlighting widget
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('GtkSource', '3.0')
+from gi.repository import Gtk, GtkSource#, GdkX11, Gdk
+
+builder = Gtk.Builder()
+builder.add_from_file("my_ui.glade")
+
+window = builder.get_object("window1")
+
+# Show the window
+window.show_all()
+
+# Start the GTK main loop
+Gtk.main()
