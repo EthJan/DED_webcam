@@ -10,16 +10,22 @@ def main():
     # Get the main window and notebook
     window = builder.get_object("window1")
     notebook = builder.get_object("notebook1")  # Get the notebook widget
+
+    # Navigate to the container holding the placeholder
+    # Example assumes placeholder is inside a box inside a notebook page
+    parent_container = builder.get_object("parent_container")  # Replace with actual container ID
     placeholder = builder.get_object("placeholder")  # Get the placeholder widget
 
     # Replace the placeholder with a GtkSourceView widget in the notebook
     if placeholder is not None:
-        page_num = notebook.page_num(placeholder)
-        notebook.remove_page(page_num)
+        # Remove the placeholder from its parent container
+        parent_container.remove(placeholder)
 
         # Create a new GtkSourceView widget
         source_view = GtkSource.View()
-        notebook.insert_page(source_view, None, page_num)
+
+        # Add the GtkSourceView widget to the same container
+        parent_container.add(source_view)
 
     # Get the drawing area for the webcam
     drawing_area = builder.get_object("drawingarea1")
