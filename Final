@@ -1,3 +1,4 @@
+
 import gi
 import subprocess
 from gi.repository import Gtk, GtkSource, GdkX11, Gdk
@@ -5,30 +6,28 @@ from gi.repository import Gtk, GtkSource, GdkX11, Gdk
 def main():
     # Load the Glade file
     builder = Gtk.Builder()
-    builder.add_from_file("my_ui.glade")
-
+    builder.add_from_file("/home/operator/tmc/python/images/tormach_mill_ui.glade")
     # Get the main window and notebook
-    window = builder.get_object("window1")
-    notebook = builder.get_object("notebook1")  # Get the notebook widget
+    window = builder.get_object("main_window")
+    notebook = builder.get_object("notebook")  # Get the notebook widget
 
     # Find the notebook page
     notebook_page = notebook.get_nth_page(1)  # Adjust index if needed
     
     # Get the GtkFixed container and placeholder
-    fixed_container = builder.get_object("fixed_container")  # ID of GtkFixed container
-    placeholder = builder.get_object("placeholder")  # ID of placeholder widget
-
-    if fixed_container and placeholder:
+    #fixed_container = builder.get_object("gcode_page_fixed")  # ID of GtkFixed container
+    placeholder = builder.get_object("drawingarea4")  # ID of placeholder widget
+    parent = placeholder.get_parent()
+    if placeholder:
         # Remove the placeholder from the fixed container
-        fixed_container.remove(placeholder)
+        parent.remove(placeholder)
 
         # Create a new GtkSourceView widget
         source_view = GtkSource.View()
-        source_view.set_name("new_gtksourceview")  # Set a name for the new widget
 
         # Add the GtkSourceView widget to the fixed container at specific coordinates
-        fixed_container.put(source_view, 10, 10)  # Adjust x, y coordinates as needed
-        fixed_container.show_all()  # Show all children
+        parent.add(placeholder)
+        parent.show_all()# all children
 
     # Get the drawing area for the webcam
     drawing_area = builder.get_object("drawingarea1")
@@ -48,3 +47,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
