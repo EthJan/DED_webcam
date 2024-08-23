@@ -4,36 +4,30 @@ gi.require_version('GtkSource', '3.0')
 from gi.repository import Gtk, GtkSource
 
 def main():
-    # Initialize the builder and load the Glade file
     builder = Gtk.Builder()
     builder.add_from_file("my_ui.glade")
 
-    # Get the main window
     window = builder.get_object("window1")
+    notebook = builder.get_object("notebook1")  # Get the notebook widget
+    placeholder = builder.get_object("placeholder")  # Get the placeholder widget
 
-    # Find the placeholder widget
-    placeholder = builder.get_object("placeholder_widget")  # Use the actual ID from Glade
+    # Determine which page the placeholder is on
+    page_num = notebook.page_num(placeholder)
 
-    if placeholder:
-        # Get the parent container of the placeholder
-        parent = placeholder.get_parent()
+    # Remove the placeholder widget from the notebook page
+    notebook.remove_page(page_num)
 
-        # Remove the placeholder widget from the parent
-        parent.remove(placeholder)
+    # Create a new GtkSourceView widget
+    source_view = GtkSource.View()
 
-        # Create the GtkSourceView widget
-        source_view = GtkSource.View()
+    # Add the new GtkSourceView widget to the notebook page where the placeholder was
+    notebook.insert_page(source_view, None, page_num)
 
-        # Add GtkSourceView to the parent container
-        parent.pack_start(source_view, True, True, 0)
+    # Show all widgets in the window
+    window.show_all()
 
-        # Show all widgets
-        window.show_all()
-
-        # Start the GTK main loop
-        Gtk.main()
-    else:
-        print("Placeholder widget not found!")
+    # Start the GTK main loop
+    Gtk.main()
 
 if __name__ == "__main__":
     main()
