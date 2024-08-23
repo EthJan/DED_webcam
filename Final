@@ -1,0 +1,41 @@
+import gi
+import subprocess
+from gi.repository import Gtk, GtkSource, GdkX11, Gdk
+
+def main():
+    # Load the Glade file
+    builder = Gtk.Builder()
+    builder.add_from_file("my_ui.glade")
+
+    # Get the main window and notebook
+    window = builder.get_object("window1")
+    notebook = builder.get_object("notebook1")  # Get the notebook widget
+    placeholder = builder.get_object("placeholder")  # Get the placeholder widget
+
+    # Replace the placeholder with a GtkSourceView widget in the notebook
+    if placeholder is not None:
+        page_num = notebook.page_num(placeholder)
+        notebook.remove_page(page_num)
+
+        # Create a new GtkSourceView widget
+        source_view = GtkSource.View()
+        notebook.insert_page(source_view, None, page_num)
+
+    # Get the drawing area for the webcam
+    drawing_area = builder.get_object("drawingarea1")
+
+    # Show the window
+    window.show_all()
+
+    # Get the XID of the drawing area
+    xid = drawing_area.get_window().get_xid()
+
+    # Run mplayer with the XID embedded in the drawing area
+    command = "mplayer tv:// -tv driver=v4l2:device=/dev/video0 -wid %d" % xid
+    subprocess.Popen(command, shell=True)
+
+    # Start the GTK main loop
+    Gtk.main()
+
+if __name__ == "__main__":
+    main()
