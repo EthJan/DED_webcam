@@ -11,21 +11,24 @@ def main():
     window = builder.get_object("window1")
     notebook = builder.get_object("notebook1")  # Get the notebook widget
 
-    # Navigate to the container holding the placeholder
-    # Example assumes placeholder is inside a box inside a notebook page
-    parent_container = builder.get_object("parent_container")  # Replace with actual container ID
-    placeholder = builder.get_object("placeholder")  # Get the placeholder widget
+    # Find the notebook page
+    notebook_page = notebook.get_nth_page(1)  # Adjust index if needed
+    
+    # Get the GtkFixed container and placeholder
+    fixed_container = builder.get_object("fixed_container")  # ID of GtkFixed container
+    placeholder = builder.get_object("placeholder")  # ID of placeholder widget
 
-    # Replace the placeholder with a GtkSourceView widget in the notebook
-    if placeholder is not None:
-        # Remove the placeholder from its parent container
-        parent_container.remove(placeholder)
+    if fixed_container and placeholder:
+        # Remove the placeholder from the fixed container
+        fixed_container.remove(placeholder)
 
         # Create a new GtkSourceView widget
         source_view = GtkSource.View()
+        source_view.set_name("new_gtksourceview")  # Set a name for the new widget
 
-        # Add the GtkSourceView widget to the same container
-        parent_container.add(source_view)
+        # Add the GtkSourceView widget to the fixed container at specific coordinates
+        fixed_container.put(source_view, 10, 10)  # Adjust x, y coordinates as needed
+        fixed_container.show_all()  # Show all children
 
     # Get the drawing area for the webcam
     drawing_area = builder.get_object("drawingarea1")
