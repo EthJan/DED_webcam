@@ -1,0 +1,33 @@
+/8a/b9dc7678803429e4a3bc9ba462fa3dd9066824d3c607490235c6a796be5a/setuptools-75.8.0-py3-none-any.whl#sha256=e3982f444617239225d675215d51f6ba05f845d4eec313da4418fdbb56fb27e3
+  Downloading setuptools-75.8.0-py3-none-any.whl (1.2MB): 1.2MB downloaded
+Cleaning up...
+Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2482, in _dep_map
+    return self.__dep_map
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2344, in __getattr__
+    raise AttributeError(attr)
+AttributeError: _DistInfoDistribution__dep_map
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/pip/basecommand.py", line 122, in main
+    status = self.run(options, args)
+  File "/usr/lib/python3/dist-packages/pip/commands/install.py", line 278, in run
+    requirement_set.prepare_files(finder, force_root_egg_info=self.bundle, bundle=self.bundle)
+  File "/usr/lib/python3/dist-packages/pip/req.py", line 1266, in prepare_files
+    req_to_install.extras):
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2291, in requires
+    dm = self._dep_map
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2484, in _dep_map
+    self.__dep_map = self._compute_dependencies()
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2508, in _compute_dependencies
+    parsed = next(parse_requirements(distvers))
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2605, in parse_requirements
+    line, p, specs = scan_list(VERSION,LINE_END,line,p,(1,2),"version spec")
+  File "/usr/lib/python3/dist-packages/pkg_resources.py", line 2583, in scan_list
+    "Expected ',' or end-of-list in",line,"at",line[p:]
+ValueError: ("Expected ',' or end-of-list in", 'pytest!=8.1.*,>=6', 'at', '*,>=6')
+
+Storing debug log for failure in /home/operator/.pip/pip.log
